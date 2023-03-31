@@ -100,6 +100,49 @@ fn example_19_5() {
     );
 }
 
+fn example_19_6() {
+    println!("\nExample 19.6: Dipole electric field");
+
+    let d = 3.0;
+    let q = 10.0 * MICRO;
+    let y = 3.0;
+
+    let world = vec![
+        PointCharge {
+            position: glm::dvec2(0.0, 0.0),
+            charge: q,
+        },
+        PointCharge {
+            position: glm::dvec2(d, 0.0),
+            charge: -q,
+        },
+    ];
+
+    for particle in world.iter() {
+        println!(
+            "Charge at {} with charge {}C",
+            prefix_dvec2(&particle.position),
+            prefix(particle.charge)
+        );
+    }
+
+    let points = vec![
+        glm::dvec2(-d / 2.0, 0.0),
+        glm::dvec2(d / 2.0, 0.0),
+        glm::dvec2(d / 2.0, y),
+    ];
+
+    for point in points.iter() {
+        let field = field_strength_at_point(&point, &world);
+        println!(
+            "Field at {} is {}N/C",
+            prefix_dvec2(&point),
+            prefix_dvec2(&field)
+        );
+    }
+}
+
 fn main() {
     example_19_5();
+    example_19_6();
 }
