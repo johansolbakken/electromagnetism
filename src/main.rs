@@ -1,4 +1,3 @@
-// position with ndarray
 struct PointCharge {
     position: glm::DVec2,
     charge: f64,
